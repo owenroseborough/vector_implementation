@@ -2,6 +2,7 @@
 #define OWENS_VECTOR_H
 
 #include <iostream>
+#include "owens_iterator.h"
 using namespace std;
 
 template <typename T> class owens_vector {
@@ -16,52 +17,12 @@ public:
     owens_vector();
     owens_vector(size_t num);
     ~owens_vector();
-    T& operator[](int index);
+    T& operator[](size_t index);
     void operator=(std::initializer_list<T> bracedInitializer);
     size_t size();
     void print();
-    class owens_iterator {
-    private:
-        T* m_pointer;
-
-    public:
-        void owens_iterator_begin() {
-            //set value of owens_iterator pointer to beginning of array
-            m_pointer = m_begin;
-        }
-        void owens_iterator_end() {
-            //set value of owens_iterator pointer to ending of array
-            m_pointer = m_end;
-        }
-        T operator*() {
-            //return value pointed to by iterator
-            return *m_pointer;
-        }
-        void operator++() {
-            //increment owens_iterator
-            if (m_pointer < m_end) {
-                m_pointer++;
-            }
-        }
-        void operator--() {
-            //decrement owens_iterator
-            if (m_pointer > m_begin) {
-                m_pointer--;
-            }
-        }
-    };
-    owens_iterator begin() {
-        //need to return instance of owens_iterator pointing to beginning of array
-        owens_iterator iterator();
-        iterator.owens_iterator_begin();
-        return iterator;
-    }
-    owens_iterator end() {
-        //need to return instance of owens_iterator pointing to ending of array
-        owens_iterator iterator();
-        iterator.owens_iterator_end();
-        return iterator;
-    }
+    owens_iterator<T> begin();
+    owens_iterator<T> end();
 };
 template <typename T> owens_vector<T>::owens_vector()
 {
@@ -80,7 +41,7 @@ template <typename T> owens_vector<T>::owens_vector(size_t num)
 template <typename T> owens_vector<T>::~owens_vector<T>() {
     delete[] m_array;
 }
-template <typename T> T& owens_vector<T>::operator[](int index)
+template <typename T> T& owens_vector<T>::operator[](size_t index)
 {
     if (index < 0 || index >= m_size) {
         throw std::out_of_range("Index out of range");
@@ -107,6 +68,7 @@ template <typename T> void owens_vector<T>::operator=(std::initializer_list<T> b
         index++;
     }
     m_end = m_begin + (--index);  //update m_end pointer to point to correct ending of array
+    m_size = m_end - m_begin + 1;     //need to update m_size
 }
 template <typename T> size_t owens_vector<T>::size()
 {
@@ -114,8 +76,22 @@ template <typename T> size_t owens_vector<T>::size()
 }
 template <typename T> void owens_vector<T>::print()
 {
-    for (const T& value : m_array) {
-        cout << value << " ";
+    for (const T* i = m_array; i < m_array + m_size; i++) {
+        cout << *i << " ";
     }
+}
+template <typename T> owens_iterator<T> owens_vector<T>::begin()
+{
+    //need to return instance of owens_iterator pointing to beginning of array
+    owens_iterator<T> iterator(m_begin, m_end);
+    iterator.begin();
+    return iterator;
+}
+template <typename T> owens_iterator<T> owens_vector<T>::end()
+{
+    //need to return instance of owens_iterator pointing to ending of array
+    owens_iterator<T> iterator(m_begin, m_end);
+    iterator.end();
+    return iterator;
 }
 #endif // OWENS_VECTOR_H
