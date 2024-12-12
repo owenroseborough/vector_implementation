@@ -98,7 +98,7 @@ template <typename T> owens_iterator<T> owens_vector<T>::end()
 template <typename T> void owens_vector<T>::push_back(T value)
 {
     //check if array is full
-    if (m_end - m_begin == m_size) {
+    if (m_end - m_begin == m_size - 1) {
         //if full, double size of vector
         T* new_array = new T[m_size * 2];
         //copy elements over from old vector to new vector
@@ -106,10 +106,11 @@ template <typename T> void owens_vector<T>::push_back(T value)
             new_array[i] = m_array[i];
         }
         delete[] m_array;
-        m_array = new T[m_size * 2]
         m_array = new_array;
-        delete[] new_array;
-        m_size++;
+        m_begin = m_array;
+        m_end = m_array + m_size;
+        *m_end = value;
+        m_size = m_size * 2;
     }
     //else if array not full then add value to end
     else {
