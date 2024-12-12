@@ -23,6 +23,7 @@ public:
     void print();
     owens_iterator<T> begin();
     owens_iterator<T> end();
+    void push_back(T value);
 };
 template <typename T> owens_vector<T>::owens_vector()
 {
@@ -93,5 +94,28 @@ template <typename T> owens_iterator<T> owens_vector<T>::end()
     owens_iterator<T> iterator(m_begin, m_end);
     iterator.end();
     return iterator;
+}
+template <typename T> void owens_vector<T>::push_back(T value)
+{
+    //check if array is full
+    if (m_end - m_begin == m_size) {
+        //if full, double size of vector
+        T* new_array = new T[m_size * 2];
+        //copy elements over from old vector to new vector
+        for (size_t i = 0; i < m_size; i++) {
+            new_array[i] = m_array[i];
+        }
+        delete[] m_array;
+        m_array = new T[m_size * 2]
+        m_array = new_array;
+        delete[] new_array;
+        m_size++;
+    }
+    //else if array not full then add value to end
+    else {
+        m_end++;
+        *m_end = value;
+        m_size++;
+    }
 }
 #endif // OWENS_VECTOR_H
