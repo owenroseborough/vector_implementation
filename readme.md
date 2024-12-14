@@ -1,14 +1,13 @@
-# Owens Vector Library 🧮
+# Owens Vector Implementation 🧮
 
-Owens Vector is a custom implementation of a dynamic array container in C++ that offers powerful features similar to `std::vector`. This library is ideal for learning and exploring custom container implementations.
+custom implementation of the STL vector in C++ that offers features similar to `std::vector`.
 
 ## 🌟 Features
-- **Dynamic Memory Management**: Automatically resizes when needed.
-- **Custom Iterator Support**: Seamlessly traverse elements using `owens_iterator`.
-- **Common Operations**: Includes `push_back`, `pop_back`, `insert`, and more.
-- **Memory Management**: Efficient doubling strategy for resizing.
+- **Dynamic Memory Management**: Automatically doubles vector size when needed
+- **Custom Iterator Support**: traverse elements using c++ range based for loop
+- **Common Operations**: Includes `push_back`, `pop_back`,and `insert`
 
 ## 🛠️ Installation
 Clone the repository to your local machine:
 ```bash
-git clone https://github.com/yourusername/owens-vector.git
+git clone https://github.com/owenroseborough/owens-vector.git
