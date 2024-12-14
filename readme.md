@@ -1,4 +1,4 @@
-# Owens Vector Implementation 🧮
+# Owen's Vector Implementation 🧮
 
 custom implementation of the STL vector in C++ that offers features similar to `std::vector`.
 
