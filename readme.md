@@ -10,4 +10,4 @@ custom implementation of the STL vector in C++ that offers features similar to `
 ## 🛠️ Installation
 Clone the repository to your local machine:
 ```bash
-git clone https://github.com/owenroseborough/owens-vector.git
+git clone https://github.com/owenroseborough/vector_implementation.git
